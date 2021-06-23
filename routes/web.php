@@ -20,3 +20,7 @@ Route::get('/', function () {
 
 Route::get('/students', [StudentController::class, 'index']);
 Route::post('/add-students', [StudentController::class, 'addStudent'])->name('student.add');
+Route::get('/students/{id}', [StudentController::class, 'getStudentById']);
+Route::put('/student', [StudentController::class, 'updateStudent'])->name('student.update');
+Route::delete('/students/{id}', [StudentController::class, 'deleteStudent']);
+Route::delete('/selected-students', [StudentController::class, 'deleteCheckedStudent'])->name('student.deleteselected');

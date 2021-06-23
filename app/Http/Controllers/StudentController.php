@@ -21,7 +21,37 @@ class StudentController extends Controller
         $student->email = $request->email;
         $student->phone = $request->phone;
         $student->save();
-        
         return response()->json($student);
+    }
+
+    public function getStudentById($id)
+    {
+        $student = Student::find($id);
+        return response()->json($student);
+    }
+
+    public function updateStudent(Request $request)
+    {
+        $student = Student::find($request->id);
+        $student->firstname = $request->firstname;
+        $student->lastname = $request->lastname;
+        $student->email = $request->email;
+        $student->phone = $request->phone;
+        $student->save();
+        return response()->json($student);
+    }
+
+    public function deleteStudent($id)
+    {
+        $student = Student::find($id);
+        $student->delete();
+        return response()->json(['success'=>'Record has been deleted']);
+    }
+
+    public function deleteCheckedStudent(Request $request)
+    {
+        $ids = $request->ids;
+        Student::WhereIn('id',$ids)->delete();
+        return response()->json(['success' => 'Students have been deleted']);
     }
 }
